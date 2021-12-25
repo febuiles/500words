@@ -1,0 +1,20 @@
+current directory: /Users/federico/dev/words/vendor/gems/ruby/3.0.0/gems/io-console-0.5.9/ext/io/console
+/Users/federico/.rbenv/versions/3.0.3/bin/ruby -I /Users/federico/.rbenv/versions/3.0.3/lib/ruby/3.0.0 -r ./siteconf20211225-6696-v1n3e5.rb extconf.rb
+checking for termios.h... yes
+checking for cfmakeraw() in termios.h... yes
+checking for sys/ioctl.h... yes
+checking for HAVE_RUBY_FIBER_SCHEDULER_H... no
+checking for rb_scheduler_timeout()... no
+creating Makefile
+
+current directory: /Users/federico/dev/words/vendor/gems/ruby/3.0.0/gems/io-console-0.5.9/ext/io/console
+make DESTDIR\= clean
+
+current directory: /Users/federico/dev/words/vendor/gems/ruby/3.0.0/gems/io-console-0.5.9/ext/io/console
+make DESTDIR\=
+compiling console.c
+linking shared-object io/console.bundle
+
+current directory: /Users/federico/dev/words/vendor/gems/ruby/3.0.0/gems/io-console-0.5.9/ext/io/console
+make DESTDIR\= install
+/usr/local/bin/ginstall -c -m 0755 console.bundle ./.gem.20211225-6696-3d785k/io
