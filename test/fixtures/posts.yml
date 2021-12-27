@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  user_created_at: 2021-12-26 22:37:51
+  text: MyText
+  private: false
+  location: MyString
+
+two:
+  user_id: 1
+  user_created_at: 2021-12-26 22:37:51
+  text: MyText
+  private: false
+  location: MyString
