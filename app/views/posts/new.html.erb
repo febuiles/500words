@@ -1,0 +1,32 @@
+<% content_for :title, "New Post" %>
+
+<h1>Create a New Post</h1>
+
+<%= form_with(model: @post) do |form| %>
+  <% if @post.errors.any? %>
+    <div class="flash alert">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+      <ul>
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group" data-controller="word-counter" data-word-counter-goal-value="500">
+    <%= form.label :content, "Start typing your story" %>
+    <div class="word-counter" id="word-counter" data-word-counter-target="counter">0 words</div>
+    <%= form.text_area :content, class: "form-control", 
+                      id: "post-content", 
+                      placeholder: "Start typing... aim for 500 words!",
+                      data: { 
+                        word_counter_target: "textarea",
+                        action: "input->word-counter#updateWordCount"
+                      } %>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit "Save Post", class: "btn" %>
+  </div>
+<% end %>

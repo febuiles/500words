@@ -1,0 +1,29 @@
+<% content_for :title, "All Posts" %>
+
+<h1>All Posts</h1>
+
+<% if logged_in? %>
+  <div class="actions">
+    <%= link_to "Create New Post", new_post_path, class: "btn" %>
+  </div>
+<% end %>
+
+<% if @posts.any? %>
+  <div class="posts-list">
+    <% @posts.each do |post| %>
+      <div class="post-card">
+        <h3><%= link_to "Post by #{post.user.username}", post_path(post) %></h3>
+        <p><%= truncate(post.content, length: 200) %></p>
+        <div class="post-meta">
+          <span class="post-date"><%= post.created_at.strftime("%B %d, %Y") %></span>
+          <span class="word-count <%= 'highlight' if post.word_count >= 500 %>">
+            <%= post.word_count %> words
+            <%= '🎉' if post.word_count >= 500 %>
+          </span>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p>No posts yet. Be the first to create one!</p>
+<% end %>

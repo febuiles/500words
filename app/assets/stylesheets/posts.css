@@ -1,0 +1,59 @@
+/* Post styles */
+
+/* Shared post components */
+.post-card {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.post-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+
+.post-date {
+  color: #666;
+}
+
+.word-count.highlight {
+  font-weight: bold;
+  color: #ff5722;
+}
+
+.actions {
+  margin: 1rem 0 2rem;
+}
+
+/* Post show page */
+.post-header {
+  margin-bottom: 2rem;
+}
+
+.post-content {
+  line-height: 1.8;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  white-space: pre-wrap;
+}
+
+.post-actions {
+  margin-bottom: 1.5rem;
+}
+
+.navigation {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+/* Post list styles */
+.posts-list {
+  display: grid;
+  gap: 1.5rem;
+} 

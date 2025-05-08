@@ -1,0 +1,36 @@
+<% content_for :title, "Edit Post" %>
+
+<h1>Edit Your Post</h1>
+
+<%= form_with(model: @post) do |form| %>
+  <% if @post.errors.any? %>
+    <div class="flash alert">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+      <ul>
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group" data-controller="word-counter" data-word-counter-goal-value="500">
+    <%= form.label :content, "Edit your story" %>
+    <div class="word-counter" id="word-counter" data-word-counter-target="counter"><%= @post.word_count %> words</div>
+    <%= form.text_area :content, class: "form-control", 
+                      id: "post-content", 
+                      data: { 
+                        word_counter_target: "textarea",
+                        action: "input->word-counter#updateWordCount"
+                      } %>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit "Update Post", class: "btn" %>
+  </div>
+<% end %>
+
+<div class="actions">
+  <%= link_to "Back to Post", @post, class: "btn" %>
+  <%= button_to "Delete Post", @post, method: :delete, data: { confirm: "Are you sure you want to delete this post?" }, class: "btn" %>
+</div>

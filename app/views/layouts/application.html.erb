@@ -1,30 +1,60 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>500words</title>
+    <title><%= content_for(:title) || "500words" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <link href="http://fonts.cdnfonts.com/css/bodoni-std" rel="stylesheet">
-    <style>
-                            @import url('http://fonts.cdnfonts.com/css/bodoni-std');
-</style>
+    <%= yield :head %>
+
+    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
   </head>
 
   <body>
     <header>
-      <div class="logo">
-        <%= image_tag "logo.png" %>
+      <div class="container">
+        <nav>
+          <a href="<%= root_path %>" class="brand">500words</a>
+          <ul>
+            <% if logged_in? %>
+              <li><%= link_to "New Post", new_post_path %></li>
+              <li><%= link_to "My Profile", user_path(current_user) %></li>
+              <li><%= link_to "Logout", logout_path, data: { turbo_method: :delete } %></li>
+            <% else %>
+              <li><%= link_to "Sign Up", signup_path %></li>
+              <li><%= link_to "Login", login_path %></li>
+            <% end %>
+          </ul>
+        </nav>
       </div>
-      <div class="header-toolbar">
-        <%= link_to "Posts", "" %>
-        <%= link_to "Username", "" %>
-      </div>
+    </header>
 
-    <main class="container">
+    <div class="container">
+      <% if flash[:notice] %>
+        <div class="flash notice">
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
+
+      <% if flash[:alert] %>
+        <div class="flash alert">
+          <%= flash[:alert] %>
+        </div>
+      <% end %>
+
       <%= yield %>
-    </main>
+    </div>
   </body>
 </html>
