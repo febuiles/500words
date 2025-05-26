@@ -2,20 +2,20 @@
 
 <div class="editor-container">
   <% if logged_in? %>
-  <% # TODO rewrite this form %> 
+  <% # TODO rewrite this form %>
     <%= form_with(model: @post, url: posts_path, data: { controller: "word-counter" }) do |form| %>
       <div class="editor-header">
         <div class="word-count" data-word-counter-target="counter">0/500</div>
       </div>
-      
-      <%= form.text_area :content, 
-                        class: "content-editor", 
-                        placeholder: "Start typing. Aim for 500 words...",
-                        autofocus: true,
-                        data: { 
-                          word_counter_target: "textarea",
-                          action: "input->word-counter#updateWordCount"
-                        } %>
+
+      <%= form.text_area :content,
+        class: "content-editor",
+          placeholder: "Start typing. Aim for 500 words a day, that's like two novels a year.",
+          autofocus: true,
+          data: {
+            word_counter_target: "textarea",
+            action: "input->word-counter#updateWordCount"
+          } %>
       <div class="editor-footer">
         <%= form.submit "Save", class: "btn" %>
       </div>
@@ -25,9 +25,9 @@
       <div class="editor-header">
         <div class="word-count" data-word-counter-target="counter">0/500</div>
       </div>
-      
-      <textarea class="content-editor" 
-                placeholder="Start typing. Aim for 500 words, that's like two novels a year." 
+
+      <textarea class="content-editor"
+                placeholder="Start typing. Aim for 500 words a day, that's like two novels a year."
                 autofocus
                 data-word-counter-target="textarea"
                 data-action="input->word-counter#updateWordCount"></textarea>
@@ -38,4 +38,4 @@
       </div>
     </div>
   <% end %>
-</div> 
+</div>
