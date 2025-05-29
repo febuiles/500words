@@ -1,33 +1,32 @@
 require "test_helper"
 
 class PostsControllerTest < ActionDispatch::IntegrationTest
-  test "should get new" do
-    get posts_new_url
+  def setup
+    @user1 = users(:one)
+    @user2 = users(:two)
+    @post1 = posts(:one)
+    @post2 = posts(:two)
+  end
+
+  test "user can access their own post" do
+    post login_path, params: { email: @user1.email, password: "password" }
+    get post_path(@post1)
     assert_response :success
   end
 
-  test "should get create" do
-    get posts_create_url
-    assert_response :success
+  test "user cannot access other users posts" do
+    post login_path, params: { email: @user1.email, password: "password" }
+    get post_path(@post2)
+    assert_response :redirect
   end
 
-  test "should get edit" do
-    get posts_edit_url
-    assert_response :success
+  test "unauthenticated user cannot access any post" do
+    get post_path(@post1)
+    assert_response :redirect
   end
 
-  test "should get update" do
-    get posts_update_url
-    assert_response :success
-  end
-
-  test "should get index" do
-    get posts_index_url
-    assert_response :success
-  end
-
-  test "should get show" do
-    get posts_show_url
+  test "should get index without authentication" do
+    get posts_path
     assert_response :success
   end
 end
