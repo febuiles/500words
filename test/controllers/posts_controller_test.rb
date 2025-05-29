@@ -17,7 +17,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   test "user cannot access other users posts" do
     post login_path, params: { email: @user1.email, password: "password" }
     get post_path(@post2)
-    assert_response :redirect
+    assert_response :unauthorized
   end
 
   test "unauthenticated user cannot access any post" do

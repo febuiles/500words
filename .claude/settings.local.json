@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bundle exec rails test:*)",
+      "Bash(bin/rails test:*)"
+    ],
+    "deny": []
+  },
+  "enableAllProjectMcpServers": false
+}
