@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!, only: [:show]
+
   def new
     @user = User.new
   end
@@ -17,6 +19,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    return redirect_to posts_path, alert: "You are not authorized to view this profile" unless @user == current_user
     @posts = @user.posts.order(created_at: :desc)
   end
 

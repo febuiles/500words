@@ -13,9 +13,24 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_path
   end
 
-  test "should get show" do
+  test "user can view their own profile" do
     user = users(:one)
+    post login_path, params: { email: user.email, password: "password" }
     get user_url(user)
     assert_response :success
+  end
+
+  test "user cannot view another users profile" do
+    user1 = users(:one)
+    user2 = users(:two)
+    post login_path, params: { email: user1.email, password: "password" }
+    get user_url(user2)
+    assert_redirected_to posts_path
+  end
+
+  test "unauthenticated user is redirected from profile" do
+    user = users(:one)
+    get user_url(user)
+    assert_response :redirect
   end
 end

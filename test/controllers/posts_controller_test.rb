@@ -25,8 +25,16 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     assert_response :redirect
   end
 
-  test "should get index without authentication" do
+  test "unauthenticated user is redirected from index" do
+    get posts_path
+    assert_response :redirect
+  end
+
+  test "index only shows the current users own posts" do
+    post login_path, params: { email: @user1.email, password: "password" }
     get posts_path
     assert_response :success
+    assert_match @post1.content, @response.body
+    assert_no_match /Post by #{@user2.username}/, @response.body
   end
 end
