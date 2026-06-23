@@ -32,3 +32,26 @@ introduced. When building it, follow these constraints:
 - **Mailer framework:** Action Mailer is loaded; Action Mailbox/Action Text are
   intentionally not (see `config/application.rb`). Outbound reset/verification
   email needs only Action Mailer, so no framework change is required.
+
+## Production data operations
+
+The entire datastore is a single SQLite file on a Fly volume. Treat it
+accordingly:
+
+- **Storage layout:** Production runs on Fly with `DATABASE_URL=sqlite3:///data/production.sqlite3`
+  (see `fly.toml`) on a mounted volume at `/data`. The primary DB plus the
+  Solid Queue/Cache/Cable databases all live there.
+- **Backups:** A single file is the whole database — back it up on a schedule.
+  Either enable Fly volume snapshots (`fly volumes snapshots`) or run a periodic
+  `sqlite3 /data/production.sqlite3 ".backup '/data/backup-<timestamp>.sqlite3'"`
+  (use `.backup`, not a file copy, so the snapshot is consistent under
+  concurrent writes) and ship it off-box. Periodically test a restore.
+- **Volume permissions:** The container runs as the non-root `rails` user
+  (uid/gid 1000) and the image chowns `db log storage tmp` to it (see
+  `Dockerfile`). Confirm `/data` is writable only by that user and not exposed
+  to other processes on the machine.
+- **Required secrets:** `RAILS_MASTER_KEY` decrypts `config/credentials.yml.enc`
+  and must be supplied as a Fly secret (`fly secrets set RAILS_MASTER_KEY=...`),
+  never committed — `config/master.key` is git-ignored. `SECRET_KEY_BASE` is
+  derived from the master key unless explicitly overridden. When SMTP is added,
+  its credentials belong in encrypted credentials or Fly secrets, not in source.
