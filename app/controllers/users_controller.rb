@@ -10,6 +10,7 @@ class UsersController < ApplicationController
     @user.password_confirmation = user_params[:password]
 
     if @user.save
+      reset_session
       session[:user_id] = @user.id
       redirect_to root_path, notice: "Account created successfully."
     else
