@@ -33,6 +33,25 @@ introduced. When building it, follow these constraints:
   intentionally not (see `config/application.rb`). Outbound reset/verification
   email needs only Action Mailer, so no framework change is required.
 
+## Cookie & logging review
+
+Reviewed and confirmed correct; recorded here so it stays correct:
+
+- **Auth cookie:** The `session_id` cookie is signed, `HttpOnly`, `SameSite=Lax`,
+  and `Secure` in production (set explicitly in the `Authentication` concern in
+  addition to `force_ssl` upgrading cookies). `SameSite=Strict` was considered
+  and rejected — it would make a user arriving from an external link appear
+  logged out. Revisit only if the app stops relying on cross-site entry.
+- **Transport:** `config.force_ssl` and `config.assume_ssl` are on in
+  production, so all cookies (session + CSRF) are flagged `Secure` and HSTS is
+  sent.
+- **Log parameter filtering:** `config/initializers/filter_parameter_logging.rb`
+  filters `passw`, `email`, `secret`, `token`, `_key`, `crypt`, `salt`, etc.,
+  so credentials and PII are redacted from logs.
+- **Log level:** Production logs at `info` (`RAILS_LOG_LEVEL`), not `debug`, so
+  raw request parameters are not written to logs. Do not lower this in
+  production.
+
 ## Production data operations
 
 The entire datastore is a single SQLite file on a Fly volume. Treat it

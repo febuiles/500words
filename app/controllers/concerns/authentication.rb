@@ -33,7 +33,15 @@ module Authentication
   def start_new_session_for(user)
     session_record = user.sessions.create!(user_agent: request.user_agent, ip_address: request.remote_ip)
     Current.session = session_record
-    cookies.signed.permanent[:session_id] = { value: session_record.id, httponly: true, same_site: :lax }
+    cookies.signed.permanent[:session_id] = {
+      value: session_record.id,
+      httponly: true,
+      same_site: :lax,
+      # Explicit in addition to force_ssl upgrading cookies in production. Lax
+      # (not Strict) so the user isn't treated as logged out when arriving via
+      # an external link.
+      secure: Rails.env.production?
+    }
   end
 
   def terminate_session
