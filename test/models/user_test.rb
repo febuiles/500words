@@ -15,7 +15,9 @@ class UserTest < ActiveSupport::TestCase
     User.create!(email: "dup@example.com", username: "dup1", password: "password")
     duplicate = User.new(email: "DUP@example.com", username: "dup2", password: "password")
     assert_not duplicate.valid?
-    assert_includes duplicate.errors[:email], "has already been taken"
+    # Neutral message (not the default "has already been taken") to avoid
+    # gratuitously confirming a registered address.
+    assert_includes duplicate.errors[:email], "can't be used"
   end
 
   test "password shorter than the minimum is rejected" do
