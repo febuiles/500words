@@ -13,6 +13,26 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_equal user.id, session[:user_id]
   end
 
+  test "login is case- and whitespace-insensitive on email" do
+    user = users(:one)
+    post login_url, params: { email: "  #{user.email.upcase}  ", password: "password" }
+    assert_redirected_to root_path
+    assert_equal user.id, session[:user_id]
+  end
+
+  test "login fails with wrong password" do
+    user = users(:one)
+    post login_url, params: { email: user.email, password: "wrong" }
+    assert_response :unprocessable_entity
+    assert_nil session[:user_id]
+  end
+
+  test "login fails for unknown email" do
+    post login_url, params: { email: "nobody@example.com", password: "password" }
+    assert_response :unprocessable_entity
+    assert_nil session[:user_id]
+  end
+
   test "should get destroy" do
     delete logout_url
     assert_response :redirect
