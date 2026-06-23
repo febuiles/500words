@@ -22,5 +22,5 @@ Rails.application.configure do
   # importmap-rails and Turbo read the nonce (via csp_meta_tag in the layout) so
   # their injected <script type="importmap"> and progress-bar styles are allowed.
   config.content_security_policy_nonce_generator = ->(request) { request.session.id.to_s }
-  config.content_security_policy_nonce_directives = %w(script-src style-src)
+  config.content_security_policy_nonce_directives = %w[script-src style-src]
 end
