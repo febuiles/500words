@@ -2,6 +2,9 @@
 require "rubygems"
 require "bundler/setup"
 
-ARGV.unshift("--ensure-latest")
+# NOTE: --ensure-latest is intentionally not injected here. It makes the binstub
+# exit non-zero whenever a newer Brakeman has been released than the one pinned
+# in Gemfile.lock, which would break CI on unrelated changes. Upgrades are
+# handled via Bundler/Dependabot instead.
 
 load Gem.bin_path("brakeman", "brakeman")
