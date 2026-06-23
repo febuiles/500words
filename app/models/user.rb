@@ -13,5 +13,7 @@ class User < ApplicationRecord
                     format: { with: URI::MailTo::EMAIL_REGEXP },
                     length: { maximum: 255 }
   validates :username, presence: true, uniqueness: true, length: { maximum: 30 }
-  validates :password, presence: true, length: { minimum: 6 }, on: :create
+  # Minimum 8; maximum 72 because bcrypt silently truncates input beyond 72
+  # bytes, so anything longer would not actually be verified in full.
+  validates :password, presence: true, length: { minimum: 8, maximum: 72 }, on: :create
 end

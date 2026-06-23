@@ -18,6 +18,12 @@ class UserTest < ActiveSupport::TestCase
     assert_includes duplicate.errors[:email], "has already been taken"
   end
 
+  test "password shorter than the minimum is rejected" do
+    user = User.new(email: "short@example.com", username: "shortpw", password: "abc123")
+    assert_not user.valid?
+    assert_includes user.errors.attribute_names, :password
+  end
+
   test "overly long email and username are rejected" do
     user = User.new(email: "#{'a' * 256}@example.com", username: "a" * 31, password: "password")
     assert_not user.valid?
