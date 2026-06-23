@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  rate_limit to: 5, within: 3.minutes, only: :create,
+    with: -> { redirect_to signup_path, alert: "Too many attempts. Please try again later." }
+
   before_action :authenticate_user!, only: [:show]
 
   def new

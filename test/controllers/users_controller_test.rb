@@ -13,6 +13,17 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_path
   end
 
+  test "signup is rate limited after too many attempts" do
+    5.times do
+      post users_url, params: { user: { username: "", email: "bad", password: "x" } }
+      assert_response :unprocessable_entity
+    end
+
+    # The 6th attempt within the window is throttled.
+    post users_url, params: { user: { username: "", email: "bad", password: "x" } }
+    assert_redirected_to signup_path
+  end
+
   test "user can view their own profile" do
     user = users(:one)
     post login_path, params: { email: user.email, password: "password" }

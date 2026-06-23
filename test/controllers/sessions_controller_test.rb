@@ -33,6 +33,17 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_nil session[:user_id]
   end
 
+  test "login is rate limited after too many attempts" do
+    10.times do
+      post login_url, params: { email: "x@example.com", password: "bad" }
+      assert_response :unprocessable_entity
+    end
+
+    # The 11th attempt within the window is throttled.
+    post login_url, params: { email: "x@example.com", password: "bad" }
+    assert_redirected_to login_path
+  end
+
   test "should get destroy" do
     delete logout_url
     assert_response :redirect
