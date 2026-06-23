@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
   def create
     if (user = User.authenticate_by(email: params[:email].to_s.strip.downcase, password: params[:password]))
       reset_session
-      session[:user_id] = user.id
+      start_new_session_for user
       redirect_to root_path, notice: "Logged in."
     else
       flash.now[:alert] = "Invalid email or password."
@@ -17,6 +17,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    terminate_session
     reset_session
     redirect_to root_path, notice: "Logged out."
   end

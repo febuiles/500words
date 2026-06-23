@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
   has_many :posts, dependent: :destroy
+  has_many :sessions, dependent: :destroy
 
   # Normalize identity fields so lookups and uniqueness are not defeated by
   # casing or stray whitespace. Email is matched case-insensitively; usernames

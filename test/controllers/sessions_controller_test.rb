@@ -8,29 +8,31 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create session with valid credentials" do
     user = users(:one)
-    post login_url, params: { email: user.email, password: "password" }
+    assert_difference -> { user.sessions.count }, 1 do
+      post login_url, params: { email: user.email, password: "password" }
+    end
     assert_redirected_to root_path
-    assert_equal user.id, session[:user_id]
+    assert cookies[:session_id].present?
   end
 
   test "login is case- and whitespace-insensitive on email" do
     user = users(:one)
     post login_url, params: { email: "  #{user.email.upcase}  ", password: "password" }
     assert_redirected_to root_path
-    assert_equal user.id, session[:user_id]
+    assert_equal 1, user.sessions.count
   end
 
   test "login fails with wrong password" do
     user = users(:one)
     post login_url, params: { email: user.email, password: "wrong" }
     assert_response :unprocessable_entity
-    assert_nil session[:user_id]
+    assert_equal 0, Session.count
   end
 
   test "login fails for unknown email" do
     post login_url, params: { email: "nobody@example.com", password: "password" }
     assert_response :unprocessable_entity
-    assert_nil session[:user_id]
+    assert_equal 0, Session.count
   end
 
   test "login is rate limited after too many attempts" do
@@ -52,26 +54,27 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   test "logout clears authenticated state" do
     user = users(:one)
     post login_url, params: { email: user.email, password: "password" }
-    assert_equal user.id, session[:user_id]
+    assert_equal 1, user.sessions.count
 
     delete logout_url
-    assert_nil session[:user_id]
-
-    # Protected resources are no longer reachable after logout.
+    # The server-side session record is destroyed...
+    assert_equal 0, user.sessions.count
+    # ...and protected resources are no longer reachable.
     get posts_url
     assert_redirected_to login_path
   end
 
-  test "login resets the pre-authentication session (fixation)" do
-    # Touch the session as an anonymous visitor so a session exists pre-login.
+  test "login does not reuse a pre-authentication session (fixation)" do
+    # Anonymous visit establishes a session cookie before authenticating.
     get login_url
-    pre_login_session = session.id
 
     user = users(:one)
     post login_url, params: { email: user.email, password: "password" }
 
-    # A successful login must not keep running on the visitor's old session id.
-    assert_not_equal pre_login_session, session.id
-    assert_equal user.id, session[:user_id]
+    assert_redirected_to root_path
+    # Authentication is bound to a fresh server-side Session record + cookie,
+    # not to whatever session the anonymous visitor was carrying.
+    assert_equal 1, user.sessions.count
+    assert cookies[:session_id].present?
   end
 end
