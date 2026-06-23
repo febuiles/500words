@@ -1,7 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_user!, only: [:show, :edit, :update, :destroy]
 
   def new
     @post = current_user.posts.build
@@ -42,14 +41,14 @@ class PostsController < ApplicationController
 
   private
 
+  # Posts are always looked up through the current user's association, so a
+  # request for someone else's (or a nonexistent) post resolves to the same
+  # 404 — a single authorization boundary that never reveals whether the
+  # record exists.
   def set_post
     @post = current_user.posts.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    head :unauthorized
-  end
-
-  def authorize_user!
-    redirect_to posts_path, alert: "You are not authorized to perform this action" unless @post.user == current_user
+    head :not_found
   end
 
   def post_params
