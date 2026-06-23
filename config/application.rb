@@ -1,6 +1,18 @@
 require_relative "boot"
 
-require "rails/all"
+require "rails"
+# Load only the frameworks this app uses. Active Storage, Action Mailbox, and
+# Action Text are intentionally omitted: the app has no file uploads or inbound
+# email, and leaving them out removes their exposed routes (blob endpoints,
+# inbound-email ingress, etc.) from the attack surface.
+require "active_model/railtie"
+require "active_job/railtie"
+require "active_record/railtie"
+require "action_controller/railtie"
+require "action_mailer/railtie"
+require "action_view/railtie"
+require "action_cable/engine"
+require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
