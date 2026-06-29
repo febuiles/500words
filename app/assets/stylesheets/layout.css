@@ -81,6 +81,28 @@ nav ul li a:hover {
   color: #999;
 }
 
+.editor-intro {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #999;
+}
+
+.editor-intro p {
+  margin-bottom: 0.75rem;
+}
+
+.editor-intro-actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.editor-divider {
+  border: none;
+  border-top: 1px solid #f0f0f0;
+  margin: 1.5rem 0;
+}
+
 .about-content {
   max-width: 700px;
   margin: 0 auto;

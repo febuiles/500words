@@ -22,6 +22,16 @@
     <% end %>
   <% else %>
     <div data-controller="word-counter">
+      <div class="editor-intro">
+        <p>Sign up to save your work</p>
+        <div class="editor-intro-actions">
+          <%= link_to "Sign Up", signup_path, class: "btn" %>
+          <%= link_to "Login", login_path, class: "btn" %>
+        </div>
+      </div>
+
+      <hr class="editor-divider">
+
       <div class="editor-header">
         <div class="word-count" data-word-counter-target="counter">0/500</div>
       </div>
@@ -31,11 +41,6 @@
                 autofocus
                 data-word-counter-target="textarea"
                 data-action="input->word-counter#updateWordCount"></textarea>
-      <div class="editor-footer">
-        <p>Sign up to save your work</p>
-        <%= link_to "Sign Up", signup_path, class: "btn" %>
-        <%= link_to "Login", login_path, class: "btn" %>
-      </div>
     </div>
   <% end %>
 </div>

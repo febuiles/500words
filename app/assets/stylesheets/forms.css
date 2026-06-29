@@ -91,6 +91,14 @@ label {
 
 }
 
+.btn-danger {
+  background-color: #dc3545;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
 .actions {
   margin: 1.5rem 0;
   display: flex;
