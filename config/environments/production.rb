@@ -84,6 +84,11 @@ Rails.application.configure do
     /.*\.fly\.dev/ # Allow Fly-assigned hostnames
   ]
 
+  # Accept subdomains (e.g. www) of a custom APP_HOST.
+  if (app_host = ENV["APP_HOST"])
+    config.hosts << /\A.*\.#{Regexp.escape(app_host)}\z/
+  end
+
   # Skip DNS rebinding protection for the default health check endpoint, which
   # Fly/Kamal probe without a routable Host header.
   config.host_authorization = { exclude: ->(request) { request.path == "/up" } }

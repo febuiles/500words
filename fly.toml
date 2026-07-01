@@ -10,6 +10,7 @@ console_command = '/rails/bin/rails console'
 [build]
 
 [env]
+  APP_HOST = '500words.co'
   DATABASE_URL = 'sqlite3:///data/production.sqlite3'
   PORT = '8080'
 
