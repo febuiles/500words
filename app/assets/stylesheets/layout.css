@@ -1,123 +1,173 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap');
+/* ============================================================
+   Base & layout
+   ============================================================ */
 
-body {
-  font-family: "SF Mono", "Monaco", "Droid Sans Mono", "Source Code Pro", monospace;
-  line-height: 1.6;
-  margin: 0;
-  padding: 0;
-  color: #333;
-  background-color: #fff;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-h1, h2, h3 {
-  color: #333;
+body {
+  font-family: var(--font-mono);
+  font-size: var(--text-base);
+  line-height: var(--leading);
+  margin: 0;
+  padding: 0;
+  color: var(--ink);
+  background-color: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Yellow highlighter for selected text — the writer's own highlight. */
+::selection {
+  background: var(--reward-tint);
+  color: var(--ink);
+}
+
+h1, h2, h3, h4 {
+  color: var(--ink);
+  line-height: var(--leading-tight);
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+
+h1 { font-size: var(--text-2xl); margin: 0 0 var(--space-5); }
+h2 { font-size: var(--text-xl); margin: 0 0 var(--space-4); }
+h3 { font-size: var(--text-lg); margin: 0 0 var(--space-3); }
+
+a {
+  color: var(--accent-strong);
+  text-decoration: none;
+  text-underline-offset: 0.15em;
+  transition: color var(--transition);
+}
+
+a:hover {
+  color: var(--ink);
+  text-decoration: underline;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: var(--radius-sm);
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: var(--space-5) 0;
 }
 
 .container {
   width: 90%;
-  max-width: 1200px;
+  max-width: 1080px;
   margin: 0 auto;
-  padding: 1rem;
+  padding: var(--space-4);
 }
 
+/* — Masthead — */
 header {
   background-color: transparent;
-  border-bottom: none;
-  padding: 1rem 0;
+  border-bottom: 1px solid var(--rule);
+  padding: var(--space-3) 0;
 }
 
 nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
 }
 
 nav .brand {
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-family: var(--font-mono);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  letter-spacing: -0.02em;
   text-decoration: none;
-  color: #666;
+  color: var(--ink);
+}
+
+nav .brand:hover {
+  color: var(--ink);
+  text-decoration: none;
 }
 
 nav ul {
   display: flex;
+  align-items: center;
   list-style: none;
   margin: 0;
   padding: 0;
+  gap: var(--space-5);
 }
 
 nav ul li {
-  margin-left: 1.5rem;
+  margin: 0;
 }
 
 nav ul li a {
+  font-size: var(--text-sm);
   text-decoration: none;
-  color: #888;
-  transition: color 0.3s ease;
+  color: var(--ink-muted);
+  transition: color var(--transition);
 }
 
 nav ul li a:hover {
-  color: #333;
+  color: var(--accent-strong);
+  text-decoration: none;
 }
 
+/* — Writing surface — */
 .editor-container {
-  max-width: 800px;
+  max-width: 760px;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: var(--space-7) var(--space-4);
 }
 
 .editor-header {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin-bottom: 2rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  margin-bottom: var(--space-5);
 }
 
 .editor-footer {
-  margin-top: 2rem;
+  margin-top: var(--space-6);
   text-align: center;
-  font-size: 0.9rem;
-  color: #999;
 }
 
 .editor-intro {
   text-align: center;
-  font-size: 0.9rem;
-  color: #999;
+  font-size: var(--text-sm);
+  color: var(--ink-muted);
 }
 
 .editor-intro p {
-  margin-bottom: 0.75rem;
+  margin-bottom: var(--space-3);
 }
 
 .editor-intro-actions {
   display: flex;
   justify-content: center;
-  gap: 0.75rem;
+  gap: var(--space-3);
 }
 
 .editor-divider {
   border: none;
-  border-top: 1px solid #f0f0f0;
-  margin: 1.5rem 0;
+  border-top: 1px solid var(--rule);
+  margin: var(--space-5) 0;
 }
 
-.about-content {
-  max-width: 700px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-  line-height: 1.8;
-}
-
-.about-content h1 {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  font-weight: 500;
-}
-
-.about-content p {
-  margin-bottom: 1.5rem;
-  font-size: 1.1rem;
-  color: #333;
+@media (max-width: 640px) {
+  nav ul { gap: var(--space-4); }
+  h1 { font-size: var(--text-xl); }
 }

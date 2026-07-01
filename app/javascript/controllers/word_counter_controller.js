@@ -19,6 +19,10 @@ export default class extends Controller {
 
     this.counterTarget.textContent = wordCount + '/' + this.goalValue
 
+    // Drive the progress rule (0–1) that grows along the counter's baseline.
+    const progress = Math.min(wordCount / this.goalValue, 1)
+    this.counterTarget.style.setProperty('--progress', progress)
+
     if (wordCount >= this.goalValue) {
       this.counterTarget.classList.add('goal-reached')
     } else {

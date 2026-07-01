@@ -9,8 +9,10 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
-/* CSS Imports */
+/* CSS Imports — tokens first so every file can consume the variables. */
+@import 'tokens';
 @import 'layout';
 @import 'components';
 @import 'forms';
 @import 'posts';
+@import 'styleguide';

@@ -1,62 +1,110 @@
-/* Post styles */
-
-/* Shared post components */
-.post-card {
-  margin-bottom: 2rem;
-  padding: 1.5rem;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  background-color: #fff;
-}
+/* ============================================================
+   Post views
+   ============================================================ */
 
 .post-meta {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1rem;
-  font-size: 0.9rem;
-  margin-top: 1rem;
+  align-items: baseline;
+  gap: var(--space-4);
+  margin: var(--space-3) 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
 }
 
 .post-date {
-  color: #666;
+  color: var(--ink-faint);
+  letter-spacing: 0.02em;
 }
 
+/* In lists, the count is a quiet signal until the goal is met. */
 .word-count.highlight {
-  font-weight: bold;
-  color: #ff5722;
+  font-weight: 600;
+  color: var(--ink);
+  background-color: var(--reward);
+  padding: 0.05rem 0.4rem;
+  border-radius: var(--radius-sm);
+  background-image: none;
 }
 
-.actions {
-  margin: 1rem 0 2rem;
-}
-
-/* Post show page */
+/* — Reading a post: set the prose in the book face — */
 .post-header {
-  margin-bottom: 2rem;
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--rule);
 }
 
 .post-content {
-  line-height: 1.8;
-  font-size: 1.1rem;
-  margin-bottom: 2rem;
+  font-family: var(--font-serif);
+  line-height: var(--leading-loose);
+  font-size: var(--text-md);
+  margin-bottom: var(--space-6);
   white-space: pre-wrap;
 }
 
+.post-content p {
+  margin: 0 0 var(--space-5);
+}
+
 .post-actions {
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--space-5);
   display: flex;
-  gap: 10px;
+  gap: var(--space-3);
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .navigation {
-  margin-top: 2rem;
-  padding-top: 1rem;
-  border-top: 1px solid #e0e0e0;
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--rule);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--ink-faint);
 }
 
-/* Post list styles */
+/* — Post list — */
 .posts-list {
   display: grid;
-  gap: 1.5rem;
-} 
+  gap: var(--space-5);
+}
+
+/* — Profile — */
+.user-info {
+  margin-bottom: var(--space-6);
+  padding: var(--space-4) var(--space-5);
+  background-color: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-lg);
+}
+
+.user-info p {
+  margin: var(--space-1) 0;
+  color: var(--ink-muted);
+}
+
+/* — Danger zone: account deletion — */
+.danger-zone {
+  margin-top: var(--space-7);
+  padding: var(--space-5);
+  border: 1px solid var(--danger);
+  border-left-width: 3px;
+  border-radius: var(--radius-lg);
+  background-color: var(--danger-tint);
+}
+
+.danger-zone h2 {
+  font-size: var(--text-lg);
+  color: var(--danger);
+  margin-bottom: var(--space-2);
+}
+
+.danger-zone p {
+  color: var(--ink-muted);
+  font-size: var(--text-sm);
+  margin: 0 0 var(--space-4);
+}
+
+.danger-zone form {
+  margin: 0;
+}

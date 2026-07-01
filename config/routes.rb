@@ -6,10 +6,10 @@ Rails.application.routes.draw do
   delete "logout", to: "sessions#destroy", as: :logout
 
   # Static pages
-  get "about", to: "pages#about", as: :about
+  get "styleguide", to: "pages#styleguide", as: :styleguide
 
   # Resources
-  resources :users, only: [:create, :show]
+  resources :users, only: [:create, :show, :destroy]
   resources :posts
 
   # Health check

@@ -8,24 +8,11 @@
   <p><strong>Total Posts:</strong> <%= @user.posts.count %></p>
 </div>
 
-<h2>Posts by <%= @user.username %></h2>
-
-<% if @posts.any? %>
-  <div class="posts-list">
-    <% @posts.each do |post| %>
-      <div class="post-card">
-        <h3><%= link_to "Post from #{post.created_at.strftime('%B %d, %Y')}", post_path(post) %></h3>
-        <p><%= truncate(post.content, length: 200) %></p>
-        <p><strong>Word Count:</strong> <%= post.word_count %>/500 words</p>
-      </div>
-    <% end %>
-  </div>
-<% else %>
-  <p>No posts yet.</p>
-<% end %>
-
-<% if current_user == @user %>
-  <div class="actions">
-    <%= link_to "Create New Post", new_post_path, class: "btn" %>
-  </div>
-<% end %>
+<section class="danger-zone">
+  <h2>Delete account</h2>
+  <p>This permanently deletes your account and all <%= pluralize(@user.posts.count, "post") %>. This can't be undone.</p>
+  <%= button_to "Delete account and all posts", user_path(@user),
+        method: :delete,
+        class: "btn btn-danger",
+        data: { turbo_confirm: "Delete your account and all your posts? This can't be undone." } %>
+</section>

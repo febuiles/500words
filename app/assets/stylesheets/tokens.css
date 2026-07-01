@@ -1,0 +1,107 @@
+/* ============================================================
+   500words — Design tokens
+   Palette: Wada Sanzo "Classic" combination #352
+     Indian Lake (pink), Lemon Yellow, Calamine Blue, Black.
+
+   Principle: ink on paper for writing. These are heavy,
+   saturated colors, so they are rationed to *signal* rather
+   than decoration — actions and brand (pink), focus and
+   progress (blue), and one earned reward: the Lemon Yellow
+   highlight when a writer crosses 500 words. The page stays
+   calm so nothing competes with the words.
+   ============================================================ */
+
+:root {
+  /* — Palette, raw — */
+  --sw-indian-lake:   #c53c69;
+  --sw-lemon-yellow:  #f8ed43;
+  --sw-calamine-blue: #78cdd0;
+  --sw-black:         #111314;
+
+  /* — Ink & paper — */
+  --paper:        #ffffff;
+  --paper-raised: #faf9f7; /* warm off-white: cards, insets */
+  --ink:          var(--sw-black);
+  --ink-muted:    #55585b; /* secondary text */
+  --ink-faint:    #8b8e91; /* meta, placeholders */
+  --rule:         #e8e6e1; /* hairline borders */
+  --rule-strong:  #d8d5cf;
+
+  /* — Calamine Blue — the calm workhorse.
+     Actions, links, focus, and the progress rule all run cool so the
+     interface stays quiet; a light fill takes dark ink text. — */
+  --cool:        var(--sw-calamine-blue);
+  --cool-hover:  #5cbfc3; /* deeper calamine for button hover */
+  --cool-strong: #147d81; /* dark teal for links & text on paper (AA) */
+  --cool-tint:   #eef8f8;
+
+  --accent:        var(--cool);
+  --accent-hover:  var(--cool-hover);
+  --accent-strong: var(--cool-strong);
+  --accent-tint:   var(--cool-tint);
+  --on-accent:     var(--ink); /* dark ink text on a light accent fill */
+
+  /* — Indian Lake — rationed to identity and alarm, never chrome.
+     Only the wordmark flourish and destructive actions wear pink, so it
+     stays a rare punctuation mark rather than the interface's voice. — */
+  --brand:        var(--sw-indian-lake);
+  --brand-strong: #a82f56;
+
+  /* — Reward: Lemon Yellow — the 500-word highlight & selection — */
+  --reward:      var(--sw-lemon-yellow);
+  --reward-tint: rgba(248, 237, 67, 0.40);
+
+  /* — Danger: deep Indian Lake, distinct from the pastel accent — */
+  --danger:      #a82f56;
+  --danger-tint: #f7e6ec;
+
+  /* — Type — the instrument (mono) and the book (serif) —
+     Loaded from Google Fonts in the layout head; system stacks
+     back them up if the network fails. */
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", "SFMono-Regular",
+               Menlo, Consolas, "Liberation Mono", monospace;
+  --font-serif: "Literata", "Iowan Old Style", "Palatino Linotype", Palatino,
+                Georgia, Cambria, "Times New Roman", serif;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial,
+               sans-serif;
+
+  --text-xs:   0.8125rem;
+  --text-sm:   0.9375rem;
+  --text-base: 1rem;
+  --text-md:   1.0625rem;
+  --text-lg:   1.25rem;
+  --text-xl:   1.5rem;
+  --text-2xl:  2rem;
+  --text-3xl:  2.75rem;
+
+  --leading-tight: 1.2;
+  --leading:       1.6;
+  --leading-loose: 1.8;
+  --tracking-wide: 0.08em; /* mono eyebrows / labels */
+
+  /* — Space (0.25rem base) — */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  /* — Radius — */
+  --radius-sm:   4px;
+  --radius:      8px;
+  --radius-lg:   14px;
+  --radius-pill: 999px;
+
+  /* — Elevation (paper, subtle) — */
+  --shadow-sm: 0 1px 2px rgba(17, 19, 20, 0.05);
+  --shadow:    0 2px 12px rgba(17, 19, 20, 0.07);
+
+  /* — Motion — */
+  --transition: 150ms ease;
+
+  /* — Focus ring: Calamine Blue — */
+  --focus-ring: 0 0 0 3px rgba(120, 205, 208, 0.55);
+}

@@ -10,6 +10,11 @@
 
     <%= yield :head %>
 
+    <%# Type: IBM Plex Mono (the instrument) + Literata (the book). %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Literata:opsz,wght@7..72,400;7..72,500&display=swap">
+
     <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
     <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
 
@@ -28,7 +33,7 @@
         <nav>
           <a href="<%= root_path %>" class="brand">500words</a>
           <ul>
-            <li><%= link_to "About", about_path %></li>
+            <li><%= link_to "New", root_path %></li>
             <% if logged_in? %>
               <li><%= link_to "My Posts", posts_path %></li>
               <li><%= link_to "Profile", user_path(current_user) %></li>

@@ -3,6 +3,6 @@ class PagesController < ApplicationController
     @post = Post.new if logged_in?
   end
 
-  def about
+  def styleguide
   end
 end

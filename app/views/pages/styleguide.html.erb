@@ -1,0 +1,114 @@
+<% content_for :title, "Style guide" %>
+
+<div class="styleguide">
+  <h1>Style guide</h1>
+  <p class="sg-lede">
+    500words is a place to write, so the page keeps quiet. Ink sits on paper and
+    the palette is rationed to meaning: Calamine&nbsp;Blue does the everyday work
+    of actions, links, focus, and progress; Indian&nbsp;Lake is held back for
+    identity and warnings; and Lemon&nbsp;Yellow is saved for the moment a writer
+    crosses 500 words. Based on Wada Sanzo&rsquo;s Classic combination&nbsp;#352.
+  </p>
+
+  <section class="sg-section">
+    <h2>Color</h2>
+    <div class="sg-swatches">
+      <div class="sg-swatch">
+        <div class="chip chip-ink"></div>
+        <div class="meta"><span class="name">Black</span><span class="role">ink · text</span><span class="hex">#111314</span></div>
+      </div>
+      <div class="sg-swatch">
+        <div class="chip chip-cool"></div>
+        <div class="meta"><span class="name">Calamine Blue</span><span class="role">actions · links · focus · progress</span><span class="hex">#78cdd0</span></div>
+      </div>
+      <div class="sg-swatch">
+        <div class="chip chip-brand"></div>
+        <div class="meta"><span class="name">Indian Lake</span><span class="role">wordmark · warnings</span><span class="hex">#c53c69</span></div>
+      </div>
+      <div class="sg-swatch">
+        <div class="chip chip-reward"></div>
+        <div class="meta"><span class="name">Lemon Yellow</span><span class="role">the 500-word reward</span><span class="hex">#f8ed43</span></div>
+      </div>
+      <div class="sg-swatch">
+        <div class="chip chip-paper"></div>
+        <div class="meta"><span class="name">Paper</span><span class="role">background</span><span class="hex">#ffffff</span></div>
+      </div>
+      <div class="sg-swatch">
+        <div class="chip chip-raised"></div>
+        <div class="meta"><span class="name">Paper (raised)</span><span class="role">cards · insets</span><span class="hex">#faf9f7</span></div>
+      </div>
+      <div class="sg-swatch">
+        <div class="chip chip-danger"></div>
+        <div class="meta"><span class="name">Deep Lake</span><span class="role">destructive</span><span class="hex">#a82f56</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sg-section">
+    <h2>Type</h2>
+    <p class="sg-note">Two faces: IBM&nbsp;Plex&nbsp;Mono is the instrument (chrome, labels, counters); Literata is the book (long-form reading).</p>
+    <div class="sg-type">
+      <div><span class="label">h1 / mono</span><h1>Two novels a year</h1></div>
+      <div><span class="label">h2 / mono</span><h2>Write like a typewriter</h2></div>
+      <div><span class="label">h3 / mono</span><h3>Read like a book</h3></div>
+      <div><span class="label">body / serif</span><p class="post-content">Five hundred words is the length of a good letter and the start of a habit. Set in Literata, prose is meant to be read without friction — long lines, generous leading, quiet color.</p></div>
+      <div><span class="label">meta / mono</span><p class="post-date">Posted July 1, 2026</p></div>
+    </div>
+  </section>
+
+  <section class="sg-section">
+    <h2>Buttons</h2>
+    <div class="sg-row">
+      <a href="#" class="btn">Save</a>
+      <a href="#" class="btn btn-secondary">Edit</a>
+      <a href="#" class="btn btn-danger">Delete</a>
+      <span class="btn" aria-disabled="true">Disabled</span>
+    </div>
+    <p class="sg-note">Primary fills with Calamine&nbsp;Blue and takes dark ink. Neutral actions stay ghosted. Delete is the only control that wears Indian&nbsp;Lake — it arms on hover and is always paired with a confirm.</p>
+  </section>
+
+  <section class="sg-section">
+    <h2>Forms</h2>
+    <div class="sg-stack">
+      <div class="form-group">
+        <label for="sg-email">Email</label>
+        <input type="email" id="sg-email" class="form-control" placeholder="you@example.com" autocomplete="off">
+      </div>
+      <div class="form-group">
+        <label for="sg-story">Your story</label>
+        <textarea id="sg-story" class="form-control" placeholder="Start typing…"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <section class="sg-section">
+    <h2>Feedback</h2>
+    <div class="flash notice">Your post was saved.</div>
+    <div class="flash alert">
+      <h2>1 error prohibited this post from being saved:</h2>
+      <ul><li>Content can&rsquo;t be blank</li></ul>
+    </div>
+  </section>
+
+  <section class="sg-section">
+    <h2>Word counter</h2>
+    <p class="sg-note">The signature. A Calamine-Blue rule tracks progress toward 500; at the goal the chip blooms into a Lemon-Yellow highlight.</p>
+    <div class="sg-row">
+      <span class="word-counter sg-progress-40">200 / 500</span>
+      <span class="word-counter sg-progress-80">400 / 500</span>
+      <span class="word-counter goal-reached">512 / 500 🎉</span>
+    </div>
+  </section>
+
+  <section class="sg-section">
+    <h2>Post card</h2>
+    <div class="post-card">
+      <h3><a href="#">Post by ada</a></h3>
+      <p>The Analytical Engine has no pretensions whatever to originate anything. It can do whatever we know how to order it to perform…</p>
+      <div class="post-meta">
+        <span class="post-date">July 1, 2026</span>
+        <span class="word-count highlight">548 words 🎉</span>
+      </div>
+    </div>
+  </section>
+</div>
