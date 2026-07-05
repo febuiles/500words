@@ -23,7 +23,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    return redirect_to posts_path, alert: "You are not authorized to view this profile" unless @user == current_user
+    redirect_to posts_path, alert: "You are not authorized to view this profile" unless @user == current_user
   end
 
   # Deletes the signed-in account and, via `dependent: :destroy`, all of its
