@@ -10,13 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_23_120200) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_23_090000) do
   create_table "posts", force: :cascade do |t|
     t.text "content", null: false
     t.datetime "created_at", null: false
+    t.integer "number", null: false
+    t.string "title"
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
     t.integer "word_count", default: 0, null: false
+    t.index ["user_id", "number"], name: "index_posts_on_user_id_and_number", unique: true
     t.index ["user_id"], name: "index_posts_on_user_id"
     t.check_constraint "length(content) <= 50000", name: "posts_content_max_length"
     t.check_constraint "word_count >= 0", name: "posts_word_count_non_negative"

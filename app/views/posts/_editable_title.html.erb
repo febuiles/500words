@@ -1,0 +1,33 @@
+<%# Inline-renamable post name.
+    heading:    :h1 / :h3 — the tag to render
+    link:       wrap the name in a link to the post (for lists)
+    page_title: keep document.title in sync after a rename %>
+<% link ||= false; page_title ||= false %>
+<%= content_tag heading, class: "editable-title",
+      data: {
+        controller: "editable-title",
+        editable_title_url_value: post_path(post),
+        editable_title_page_title_value: page_title
+      } do %>
+  <span class="editable-title-view">
+    <% if link %>
+      <%= link_to post.display_title, post_path(post), data: { editable_title_target: "display" } %>
+    <% else %>
+      <span data-editable-title-target="display"><%= post.display_title %></span>
+    <% end %>
+    <button type="button" class="editable-title-pencil" data-action="editable-title#edit" title="Rename" aria-label="Rename post">
+      <svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/>
+        <path d="m15 5 4 4"/>
+      </svg>
+    </button>
+  </span>
+  <span class="editable-title-editor">
+    <input type="text" class="editable-title-input" maxlength="<%= Post::MAX_TITLE_LENGTH %>"
+           aria-label="Post title"
+           data-editable-title-target="input"
+           data-action="keydown->editable-title#keydown blur->editable-title#save">
+    <button type="button" class="btn editable-title-save"
+            data-action="mousedown->editable-title#save:prevent">Save</button>
+  </span>
+<% end %>

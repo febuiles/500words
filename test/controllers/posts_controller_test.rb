@@ -61,6 +61,47 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     assert_response :redirect
   end
 
+  test "show uses the post name for the page title and heading" do
+    post login_path, params: { email: @user1.email, password: "password" }
+    get post_path(@post1)
+    assert_select "title", "500words — Post 1"
+    assert_select "h1", /Post 1/
+
+    @post1.update!(title: "Morning pages")
+    get post_path(@post1)
+    assert_select "title", "500words — Morning pages"
+    assert_select "h1", /Morning pages/
+  end
+
+  test "owner can rename their post in place via JSON" do
+    post login_path, params: { email: @user1.email, password: "password" }
+
+    patch post_path(@post1), params: { post: { title: "Morning pages" } }, as: :json
+    assert_response :success
+    assert_equal "Morning pages", @response.parsed_body["title"]
+    assert_equal "Morning pages", @post1.reload.title
+
+    patch post_path(@post1), params: { post: { title: "" } }, as: :json
+    assert_equal "Post 1", @response.parsed_body["title"]
+    assert_nil @post1.reload.title
+  end
+
+  test "renaming rejects an over-long title" do
+    post login_path, params: { email: @user1.email, password: "password" }
+
+    patch post_path(@post1), params: { post: { title: "a" * (Post::MAX_TITLE_LENGTH + 1) } }, as: :json
+    assert_response :unprocessable_entity
+    assert_nil @post1.reload.title
+  end
+
+  test "user cannot rename another users post" do
+    post login_path, params: { email: @user1.email, password: "password" }
+
+    patch post_path(@post2), params: { post: { title: "hijacked" } }, as: :json
+    assert_response :not_found
+    assert_nil @post2.reload.title
+  end
+
   test "index only shows the current users own posts" do
     post login_path, params: { email: @user1.email, password: "password" }
     get posts_path

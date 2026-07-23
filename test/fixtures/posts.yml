@@ -4,8 +4,10 @@ one:
   content: MyText
   word_count: 1
   user: one
+  number: 1
 
 two:
   content: MyText
   word_count: 1
   user: two
+  number: 1

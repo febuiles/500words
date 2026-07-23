@@ -12,7 +12,7 @@
   <div class="posts-list">
     <% @posts.each do |post| %>
       <div class="post-card">
-        <h3><%= link_to "Post by #{post.user.username}", post_path(post) %></h3>
+        <%= render "editable_title", post: post, heading: :h3, link: true %>
         <p><%= truncate(post.content, length: 200) %></p>
         <div class="post-meta">
           <span class="post-date"><%= post.created_at.strftime("%B %d, %Y") %></span>

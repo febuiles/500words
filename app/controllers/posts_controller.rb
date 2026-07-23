@@ -21,9 +21,15 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      redirect_to @post, notice: "Post updated successfully!"
+      respond_to do |format|
+        format.html { redirect_to @post, notice: "Post updated successfully!" }
+        format.json { render json: { title: @post.display_title } }
+      end
     else
-      render :edit, status: :unprocessable_entity
+      respond_to do |format|
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: { errors: @post.errors.full_messages }, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -52,6 +58,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:content)
+    params.require(:post).permit(:content, :title)
   end
 end

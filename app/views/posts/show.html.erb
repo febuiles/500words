@@ -1,7 +1,7 @@
-<% content_for :title, "View Post" %>
+<% content_for :title, "500words — #{@post.display_title}" %>
 
 <div class="post-header">
-  <h1>Post by <%= @post.user.username %></h1>
+  <%= render "editable_title", post: @post, heading: :h1, page_title: true %>
   <div class="post-meta">
     <span class="post-date"><%= @post.created_at.strftime("%B %d, %Y at %I:%M %p") %></span>
     <span class="word-count <%= 'highlight' if @post.word_count >= 500 %>">

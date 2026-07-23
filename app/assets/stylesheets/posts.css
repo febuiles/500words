@@ -63,6 +63,56 @@
   color: var(--ink-faint);
 }
 
+/* — Inline rename: the name swaps for an input + save button in place — */
+.editable-title .editable-title-editor {
+  display: none;
+}
+
+.editable-title.editing .editable-title-view {
+  display: none;
+}
+
+.editable-title.editing .editable-title-editor {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.editable-title-pencil {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-left: var(--space-2);
+  cursor: pointer;
+  color: var(--ink-faint);
+  font-size: 0.65em;
+  vertical-align: 0.15em;
+  transition: color var(--transition);
+}
+
+.editable-title-pencil:hover,
+.editable-title-pencil:focus-visible {
+  color: var(--accent-strong);
+}
+
+.editable-title-input {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  color: var(--ink);
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid var(--cool);
+  border-radius: 0;
+  padding: 0;
+  outline: none;
+}
+
+.editable-title-save {
+  flex: none;
+  padding: 0.35rem 0.9rem;
+}
+
 /* — Post list — */
 .posts-list {
   display: grid;
