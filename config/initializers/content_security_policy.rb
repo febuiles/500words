@@ -21,9 +21,14 @@ Rails.application.configure do
     policy.frame_ancestors :none
   end
 
-  # Generate session nonces for permitted importmap and inline scripts/styles.
+  # Generate per-request nonces for permitted importmap and inline scripts/styles.
   # importmap-rails and Turbo read the nonce (via csp_meta_tag in the layout) so
   # their injected <script type="importmap"> and progress-bar styles are allowed.
-  config.content_security_policy_nonce_generator = ->(request) { request.session.id.to_s }
+  #
+  # Do NOT derive this from request.session.id: that is nil until something is
+  # written to the session, so every first-time (logged-out) visitor got an empty
+  # nonce, which emitted `script-src 'self' 'nonce-'` and silently blocked the
+  # inline importmap — taking all Stimulus controllers with it.
+  config.content_security_policy_nonce_generator = ->(_request) { SecureRandom.base64(16) }
   config.content_security_policy_nonce_directives = %w[script-src style-src]
 end
