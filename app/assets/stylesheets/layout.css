@@ -15,7 +15,7 @@ body {
   margin: 0;
   padding: 0;
   color: var(--ink);
-  background-color: var(--ground);
+  background-color: var(--paper);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -74,7 +74,7 @@ hr {
 
 /* — Masthead — */
 header {
-  background-color: var(--paper);
+  background-color: transparent;
   border-bottom: 1px solid var(--rule);
   padding: var(--space-3) 0;
 }
@@ -127,22 +127,22 @@ nav ul li a:hover {
 }
 
 /* — Writing surface —
-   A sheet of paper raised off the cream desk. The sheet grows with
-   the text (see .content-editor) so the page scrolls, never the
-   textarea: the writer only ever sees an open canvas. */
+   An all-white canvas. The faintest side rules mark the measure of
+   the page; the surface grows with the text (see .content-editor) so
+   the page scrolls, never the textarea. */
 .editor-container {
   max-width: 760px;
   margin: var(--space-6) auto var(--space-7);
-  padding: var(--space-7) var(--space-8);
-  background-color: var(--paper);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow);
+  padding: var(--space-6) var(--space-8);
+  border-left: 1px solid var(--rule);
+  border-right: 1px solid var(--rule);
 }
 
 @media (max-width: 640px) {
   .editor-container {
     padding: var(--space-5) var(--space-4);
     margin-top: var(--space-4);
+    border: none;
   }
 }
 
