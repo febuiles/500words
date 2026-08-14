@@ -81,6 +81,14 @@
     background-color var(--transition);
 }
 
+/* In the editor the counter is a highlighter swipe on the page;
+   the soft tint deepens into the full earned Lemon Yellow at 500. */
+.editor-header .word-count {
+  color: var(--ink);
+  padding: var(--space-1) var(--space-2);
+  background-color: var(--reward-tint);
+}
+
 /* Block variant used on the new/edit forms */
 .word-counter {
   margin-top: var(--space-2);

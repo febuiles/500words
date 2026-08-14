@@ -50,10 +50,17 @@ textarea:focus,
   box-shadow: var(--focus-ring);
 }
 
-/* The writing surface: no chrome, just ink on paper. */
+/* The writing surface: no chrome, just ink on paper.
+   `field-sizing: content` lets the textarea grow with the text so it
+   never scrolls internally — the page scrolls instead. Browsers
+   without it get the same behavior from the `autogrow` Stimulus
+   controller; `overflow: hidden` keeps a scrollbar from flashing in
+   either case. */
 .content-editor {
   width: 100%;
-  min-height: 70vh;
+  min-height: 55vh;
+  field-sizing: content;
+  overflow: hidden;
   padding: 0;
   border: none;
   outline: none;

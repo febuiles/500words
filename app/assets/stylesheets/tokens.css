@@ -19,6 +19,7 @@
   --sw-black:         #111314;
 
   /* — Ink & paper — */
+  --ground:       #f1efe8; /* warm cream desk the page sits on */
   --paper:        #ffffff;
   --paper-raised: #faf9f7; /* warm off-white: cards, insets */
   --ink:          var(--sw-black);
