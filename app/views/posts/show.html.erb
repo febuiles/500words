@@ -23,9 +23,5 @@
 
 <div class="navigation">
   <%= link_to "Back to All Posts", posts_path %>
-  <% if @post.user == current_user %>
-    | <%= link_to "View Your Profile", user_path(current_user) %>
-  <% else %>
-    | <%= link_to "View #{@post.user.username}'s Profile", user_path(@post.user) %>
-  <% end %>
+  | <%= link_to "View Your Profile", user_path(current_user) %>
 </div>

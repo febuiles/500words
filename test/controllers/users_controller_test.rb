@@ -8,19 +8,19 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test "should create user with valid params" do
     assert_difference("User.count") do
-      post users_url, params: { user: { username: "testuser", email: "test@example.com", password: "password123" } }
+      post users_url, params: { user: { email: "test@example.com", password: "password123" } }
     end
     assert_redirected_to root_path
   end
 
   test "signup is rate limited after too many attempts" do
     5.times do
-      post users_url, params: { user: { username: "", email: "bad", password: "x" } }
+      post users_url, params: { user: { email: "bad", password: "x" } }
       assert_response :unprocessable_entity
     end
 
     # The 6th attempt within the window is throttled.
-    post users_url, params: { user: { username: "", email: "bad", password: "x" } }
+    post users_url, params: { user: { email: "bad", password: "x" } }
     assert_redirected_to signup_path
   end
 

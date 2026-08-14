@@ -107,6 +107,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     get posts_path
     assert_response :success
     assert_match @post1.content, @response.body
-    assert_no_match /Post by #{@user2.username}/, @response.body
+    assert_select "a[href=?]", post_path(@post1)
+    assert_select "a[href=?]", post_path(@post2), count: 0
   end
 end
