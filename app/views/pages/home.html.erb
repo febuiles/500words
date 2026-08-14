@@ -3,7 +3,7 @@
 <div class="editor-container">
   <% if logged_in? %>
   <% # TODO rewrite this form %>
-    <%= form_with(model: @post, url: posts_path, data: { controller: "word-counter draft autogrow", action: "turbo:submit-end->draft#clear" }) do |form| %>
+    <%= form_with(model: @post, url: posts_path, data: { controller: "word-counter draft autogrow", draft_consume_value: true }) do |form| %>
       <div class="editor-header">
         <div class="word-count" data-word-counter-target="counter">0/500</div>
       </div>
@@ -16,7 +16,7 @@
             word_counter_target: "textarea",
             draft_target: "textarea",
             autogrow_target: "textarea",
-            action: "input->word-counter#updateWordCount input->draft#save input->autogrow#resize"
+            action: "input->word-counter#updateWordCount input->autogrow#resize"
           } %>
       <div class="editor-footer">
         <%= form.submit "Save", class: "btn" %>

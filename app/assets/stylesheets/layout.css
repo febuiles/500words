@@ -127,22 +127,18 @@ nav ul li a:hover {
 }
 
 /* — Writing surface —
-   An all-white canvas. The faintest side rules mark the measure of
-   the page; the surface grows with the text (see .content-editor) so
-   the page scrolls, never the textarea. */
+   An all-white canvas. The surface grows with the text (see
+   .content-editor) so the page scrolls, never the textarea. */
 .editor-container {
   max-width: 760px;
   margin: var(--space-6) auto var(--space-7);
-  padding: var(--space-6) var(--space-8);
-  border-left: 1px solid var(--rule);
-  border-right: 1px solid var(--rule);
+  padding: var(--space-6) var(--space-4);
 }
 
 @media (max-width: 640px) {
   .editor-container {
     padding: var(--space-5) var(--space-4);
     margin-top: var(--space-4);
-    border: none;
   }
 }
 
