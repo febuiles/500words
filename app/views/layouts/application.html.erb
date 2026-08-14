@@ -36,8 +36,8 @@
         <nav>
           <a href="<%= root_path %>" class="brand">500words</a>
           <ul>
-            <li><%= link_to "New", root_path %></li>
             <% if logged_in? %>
+              <li><%= link_to "New", root_path %></li>
               <li><%= link_to "My Posts", posts_path %></li>
               <li><%= link_to "Profile", user_path(current_user) %></li>
               <li><%= link_to "Logout", logout_path, data: { turbo_method: :delete } %></li>
