@@ -39,11 +39,16 @@
   line-height: var(--leading-loose);
   font-size: var(--text-md);
   margin-bottom: var(--space-6);
-  white-space: pre-wrap;
 }
 
+/* simple_format joins its paragraphs with literal newlines, so keep
+   whitespace collapsed: the gap should be this margin, nothing more. */
 .post-content p {
-  margin: 0 0 var(--space-5);
+  margin: 0 0 var(--space-4);
+}
+
+.post-content p:last-child {
+  margin-bottom: 0;
 }
 
 .post-actions {
