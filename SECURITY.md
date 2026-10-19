@@ -52,6 +52,20 @@ Reviewed and confirmed correct; recorded here so it stays correct:
   raw request parameters are not written to logs. Do not lower this in
   production.
 
+## Hosts & domains
+
+- **Canonical host:** The app is served at `500words.xyz`, set via `APP_HOST`
+  in `fly.toml`. Host authorization (`config.hosts` in
+  `config/environments/production.rb`) only admits `APP_HOST`, its
+  subdomains, and Fly-assigned `*.fly.dev` names.
+- **Retired domains:** `500words.co` is listed in `LEGACY_HOSTS`, and
+  `LegacyHostRedirect` (`lib/legacy_host_redirect.rb`) answers every request
+  to it (and its subdomains) with a 301 to the same path on `APP_HOST`. It
+  runs ahead of host authorization, so legacy domains are never trusted hosts.
+  Cookies don't cross domains, so users signed in on the old domain sign in
+  again once. Keep the old domain's DNS and Fly certificate for as long as the
+  redirect should work; drop it from `LEGACY_HOSTS` when it's retired for good.
+
 ## Production data operations
 
 The entire datastore is a single SQLite file on a Fly volume. Treat it

@@ -87,6 +87,16 @@ Rails.application.configure do
   # Accept subdomains (e.g. www) of a custom APP_HOST.
   if (app_host = ENV["APP_HOST"])
     config.hosts << /\A.*\.#{Regexp.escape(app_host)}\z/
+
+    # Domains the app used to live on (comma-separated LEGACY_HOSTS) get a
+    # permanent redirect to APP_HOST. The middleware sits ahead of host
+    # authorization, so the old domains never need to be in config.hosts.
+    legacy_hosts = ENV.fetch("LEGACY_HOSTS", "").split(",").map(&:strip).reject(&:empty?)
+    if legacy_hosts.any?
+      require_relative "../../lib/legacy_host_redirect"
+      config.middleware.insert_before ActionDispatch::HostAuthorization, LegacyHostRedirect,
+        legacy_hosts: legacy_hosts, canonical_host: app_host
+    end
   end
 
   # Skip DNS rebinding protection for the default health check endpoint, which
